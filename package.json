@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "hardhat": "^2.8.4",
+    "hardhat-waffle": "^0.0.1-security"
+  }
+}
