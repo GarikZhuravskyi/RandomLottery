@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@nomiclabs/hardhat-waffle": "^2.0.2",
+    "chai": "^4.3.6",
     "hardhat": "^2.8.4",
     "hardhat-waffle": "^0.0.1-security"
   }
