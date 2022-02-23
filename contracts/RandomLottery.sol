@@ -6,12 +6,12 @@ import "hardhat/console.sol";
 contract RandomLottery{
 
     // Params of the lottery
-    address payable owner;
-    address payable winner;
-    uint reward = address(this).balance;
-    uint token;
-    uint tokens;
-    uint time;
+    address payable public owner;
+    address payable public winner;
+    uint public reward = address(this).balance;
+    uint public token;
+    uint public tokens;
+    uint public time;
 
     constructor (uint tokenCost, uint lotteryTime, uint tokenAmount){
         owner = payable(msg.sender);
@@ -21,7 +21,7 @@ contract RandomLottery{
     }
 
     address[] public players;
-    mapping(address => uint) playerBalances;
+    mapping(address => uint) public playerBalances;
 
     /// Switch to true when the lottery ends
     bool ended;
@@ -32,8 +32,9 @@ contract RandomLottery{
     function buyTicket() external payable {
 
         // Next two lines should check if a user can afford the lottery ticket and the lottery is still going.
-        require(msg.sender.balance >= token, "Sorry, you can not afford the ticket");
-        require(tokens > 0 && time > 0, "Sorry, the lottery is over");
+        require(msg.value == token, "Sorry, you can not afford the ticket");
+        require(tokens > 0, "Sorry, bets are off");
+        require(block.timestamp <= time, "Sorry, the time is over");
         reward += msg.value;
         tokens -= 1;
 
